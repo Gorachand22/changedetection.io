@@ -314,6 +314,13 @@ def register_builtin_fetchers():
     if hasattr(webdriver_selenium, 'webdriver_selenium_plugin'):
         plugin_manager.register(webdriver_selenium.webdriver_selenium_plugin, 'builtin_webdriver_selenium')
 
+    try:
+        from changedetectionio.content_fetchers import cloakbrowser
+        if hasattr(cloakbrowser, 'cloakbrowser_plugin'):
+            plugin_manager.register(cloakbrowser.cloakbrowser_plugin, 'builtin_cloakbrowser')
+    except (ImportError, Exception):
+        pass
+
 
 def register_builtin_restock_plugins():
     """Register built-in restock processor plugins after all imports are complete.

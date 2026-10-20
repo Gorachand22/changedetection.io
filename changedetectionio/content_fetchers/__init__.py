@@ -30,6 +30,7 @@ SCREENSHOT_SIZE_STITCH_THRESHOLD = int(os.getenv("SCREENSHOT_CHUNK_HEIGHT", 1000
 from changedetectionio.content_fetchers.requests import fetcher as html_requests
 
 
+
 import importlib.resources
 XPATH_ELEMENT_JS = importlib.resources.files("changedetectionio.content_fetchers.res").joinpath('xpath_element_scraper.js').read_text(encoding='utf-8')
 INSTOCK_DATA_JS = importlib.resources.files("changedetectionio.content_fetchers.res").joinpath('stock-not-in-stock.js').read_text(encoding='utf-8')
@@ -190,6 +191,11 @@ if use_playwright_as_chrome_fetcher:
 else:
     logger.debug("Falling back to selenium as fetcher")
     from .webdriver_selenium import fetcher as html_webdriver
+
+try:
+    from .cloakbrowser import fetcher as html_cloakbrowser
+except Exception as e:
+    logger.warning(f"CloakBrowser fetcher not available: {e}")
 
 
 # Register built-in fetchers as plugins after all imports are complete

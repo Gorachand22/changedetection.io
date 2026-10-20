@@ -1168,9 +1168,10 @@ def changedetection_app(config=None, datastore_o=None):
             # These files should be in our subdirectory
             try:
                 # set nocache, set content-type
+                target_dir = os.path.abspath(os.path.join(datastore_o.datastore_path, filename))
                 response = make_response(
                     send_from_directory(
-                        os.path.join(datastore_o.datastore_path, filename), screenshot_filename
+                        target_dir, screenshot_filename
                     )
                 )
                 response.headers['Content-type'] = 'image/png'
@@ -1179,7 +1180,11 @@ def changedetection_app(config=None, datastore_o=None):
                 response.headers['Expires'] = 0
                 return response
 
-            except FileNotFoundError:
+            except FileNotFoundError as fnf:
+                logger.warning(f"Screenshot file not found for {filename}: {fnf}")
+                abort(404)
+            except Exception as e:
+                logger.warning(f"Error serving screenshot for {filename}: {e}")
                 abort(404)
 
         if group == 'favicon':
@@ -1225,7 +1230,7 @@ def changedetection_app(config=None, datastore_o=None):
             try:
                 # set nocache, set content-type,
                 # `filename` is actually directory UUID of the watch
-                watch_directory = str(os.path.join(datastore_o.datastore_path, filename))
+                watch_directory = os.path.abspath(os.path.join(datastore_o.datastore_path, filename))
                 response = None
                 if os.path.isfile(os.path.join(watch_directory, "elements.deflate")):
                     response = make_response(

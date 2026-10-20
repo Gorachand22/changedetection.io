@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none">
+  <defs>
+    <linearGradient id="cloakGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8b5cf6" />
+      <stop offset="50%" stop-color="#6366f1" />
+      <stop offset="100%" stop-color="#06b6d4" />
+    </linearGradient>
+  </defs>
+  <!-- Shield Outline -->
+  <path d="M12 2L3 6v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V6l-9-4z" fill="url(#cloakGrad)" />
+  <!-- Stealth Mask / Visor Inner -->
+  <path d="M7 10c0-1.5 2.2-2.5 5-2.5s5 1 5 2.5v1c0 1.5-2.2 2.5-5 2.5s-5-1-5-2.5v-1z" fill="#0f172a" />
+  <!-- Glowing Stealth Eyes -->
+  <circle cx="10" cy="10.5" r="1" fill="#38bdf8" />
+  <circle cx="14" cy="10.5" r="1" fill="#38bdf8" />
+  <!-- Stealth Cloak Swoosh -->
+  <path d="M8 14.5c1.2 1.2 2.6 1.8 4 1.8s2.8-.6 4-1.8" stroke="#38bdf8" stroke-width="1.2" stroke-linecap="round" />
+</svg>
